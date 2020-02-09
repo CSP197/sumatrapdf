@@ -23,8 +23,8 @@ class FileWriteStream : public ISequentialStream {
 
   public:
     FileWriteStream(const WCHAR* filePath) : refCount(1) {
-        hFile = CreateFile(filePath, GENERIC_WRITE, FILE_SHARE_READ, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL,
-                           nullptr);
+        hFile = CreateFileW(filePath, GENERIC_WRITE, FILE_SHARE_READ, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL,
+                            nullptr);
     }
     virtual ~FileWriteStream() {
         CloseHandle(hFile);

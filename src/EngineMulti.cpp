@@ -28,8 +28,9 @@ extern "C" {
 #include "EngineMulti.h"
 
 struct EnginePage {
-    int pageNoInEngine = 0;
+    TocItem* ti = nullptr;
     EngineBase* engine = nullptr;
+    int pageNoInEngine = 0;
 };
 
 Kind kindEngineMulti = "enginePdfMulti";
@@ -175,18 +176,13 @@ RenderedBitmap* EngineMulti::GetImageForPageElement(PageElement* pel) {
 }
 
 PageDestination* EngineMulti::GetNamedDest(const WCHAR* name) {
-    int n = 0;
-    for (auto&& f : vbkm.vbkms) {
-        auto e = f->engine;
-        if (!e) {
-            continue;
-        }
+    for (auto&& pe : pageToEngine) {
+        EngineBase* e = pe.engine;
         auto dest = e->GetNamedDest(name);
         if (dest) {
-            // TODO: add n to page number in returned destination
+            // TODO: fix up page number in returned destination
             return dest;
         }
-        n += e->PageCount();
     }
     return nullptr;
 }
@@ -224,17 +220,13 @@ WCHAR* EngineMulti::GetPageLabel(int pageNo) const {
 }
 
 int EngineMulti::GetPageByLabel(const WCHAR* label) const {
-    int n = 0;
-    for (auto&& f : vbkm.vbkms) {
-        auto e = f->engine;
-        if (!e) {
-            continue;
-        }
-        auto pageNo = e->GetPageByLabel(label);
+    for (auto&& pe : pageToEngine) {
+        EngineBase* e = pe.engine;
+        int pageNo = e->GetPageByLabel(label);
         if (pageNo != -1) {
-            return n + pageNo;
+            // TODO: fixup page number
+            return pageNo;
         }
-        n += e->PageCount();
     }
     return -1;
 }
@@ -271,6 +263,7 @@ void CalcEndPageNo(TocItem* root, int nPages) {
     prev->endPageNo = nPages;
 }
 
+#if 0
 static void MarkAsInvisibleRecur(TocItem* ti, bool markInvisible, Vec<bool>& visible) {
     while (ti) {
         if (markInvisible) {
@@ -310,6 +303,7 @@ static void CalcRemovedPages(TocItem* root, Vec<bool>& visible) {
     // from nodes that are not unchecked
     MarkAsVisibleRecur(root, !root->isUnchecked, visible);
 }
+#endif
 
 bool EngineMulti::Load(const WCHAR* fileName, PasswordUI* pwdUI) {
     AutoFreeStr filePath = strconv::WstrToUtf8(fileName);
@@ -318,6 +312,42 @@ bool EngineMulti::Load(const WCHAR* fileName, PasswordUI* pwdUI) {
         return false;
     }
 
+    // load all referenced files
+    int nTotalPages = 0;
+    std::function<bool(TocItem*)> f = [this, &nTotalPages](TocItem* ti) -> bool {
+        if (ti->engineFilePath == nullptr) {
+            return true;
+        }
+
+        AutoFreeWstr path = strconv::Utf8ToWstr(ti->engineFilePath);
+
+        EngineBase* engine = EngineManager::CreateEngine(path, nullptr);
+        if (!engine) {
+            return false;
+        }
+        int nPages = engine->PageCount();
+        for (int i = 1; i <= nPages; i++) {
+            EnginePage ep;
+            ep.engine = engine;
+            ep.ti = ti;
+            ep.pageNoInEngine =  i;
+            pageToEngine.Append(ep);
+        }
+        nTotalPages += nPages;
+        return true;
+    };
+
+    TocItem* tocRoot = CloneTocItemRecur(vbkm.tree->root, false);
+    ok = VisitTocTree(tocRoot, f);
+    if (!ok) {
+        return false;
+    }
+
+    tocTree = new TocTree(tocRoot);
+    pageCount = nTotalPages;
+
+    // TODO: finish me
+#if 0
     // create a TocTree combining all the files and hiding nodes that are unchecked
     // create a mapping between "virtual page" (from combined documents) to
     // a page in a given engine
@@ -325,8 +355,8 @@ bool EngineMulti::Load(const WCHAR* fileName, PasswordUI* pwdUI) {
     int nTotalPages = 0;
 
     // same logic as in UpdateTreeModel
-    TocItem* root = nullptr;
-    TocItem* curr = nullptr;
+    TocItem* root = vbkm.tree->root;
+    TocItem* curr = root;
 
     for (auto&& vbkm : vbkm.vbkms) {
         CrashIf(vbkm->filePath.empty());
@@ -391,8 +421,8 @@ bool EngineMulti::Load(const WCHAR* fileName, PasswordUI* pwdUI) {
 
     tocTree = new TocTree(rootCopy);
     pageCount = nTotalPages;
+#endif
     SetFileName(fileName);
-
     return true;
 }
 

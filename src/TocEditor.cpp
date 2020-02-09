@@ -87,7 +87,7 @@ TocEditorWindow::~TocEditorWindow() {
 static TocEditorWindow* gWindow = nullptr;
 
 TocEditorArgs::~TocEditorArgs() {
-    DeleteVecMembers(bookmarks);
+    delete bookmarks;
 }
 
 void MessageNYI() {
@@ -100,38 +100,28 @@ void ShowErrorMessage(const char* msg) {
     MessageBoxA(hwnd, msg, "Error", MB_OK | MB_ICONERROR);
 }
 
+void CalcEndPageNo2(TocItem* ti, int& nPages) {
+    while (ti) {
+        // this marks a root node for a document
+        if (ti->nPages > 0) {
+            CalcEndPageNo(ti, nPages);
+            nPages += ti->nPages;
+        } else {
+            CalcEndPageNo2(ti->child, nPages);
+        }
+        ti = ti->next;
+    }
+}
+
 static void UpdateTreeModel(TocEditorWindow* w) {
     TreeCtrl* treeCtrl = w->treeCtrl;
     treeCtrl->Clear();
 
-    // TODO: delete the first levels because we keep reference to them
-    // delete w->treeModel;
-    w->treeModel = nullptr;
+    VbkmFile* bookmarks = w->tocArgs->bookmarks;
+    int nPages = 0;
+    CalcEndPageNo2(bookmarks->tree->root, nPages);
 
-    auto& bookmarks = w->tocArgs->bookmarks;
-
-    TocItem* root = nullptr;
-    TocItem* curr = nullptr;
-    for (auto&& vbkm : bookmarks) {
-        TocItem* ti = new TocItem();
-        ti->isOpenDefault = true;
-        AutoFreeWstr path = strconv::Utf8ToWstr(vbkm->filePath.as_view());
-        const WCHAR* name = path::GetBaseNameNoFree(path);
-        ti->title = str::Dup(name);
-        ti->child = vbkm->toc->root;
-        ti->child->parent = ti->child;
-
-        CalcEndPageNo(ti->child, vbkm->nPages);
-
-        if (!root) {
-            root = ti;
-            curr = root;
-        } else {
-            curr->next = ti;
-            curr = ti;
-        }
-    }
-    w->treeModel = new TocTree(root);
+    w->treeModel = bookmarks->tree;
     treeCtrl->SetTreeModel(w->treeModel);
 }
 
@@ -165,6 +155,7 @@ static void AddPdf() {
         ShowErrorMessage("Failed to open a file!");
         return;
     }
+
     TocTree* tocTree = engine->GetToc();
     if (nullptr == tocTree) {
         // TODO: maybe add a dummy entry for the first page
@@ -172,20 +163,26 @@ static void AddPdf() {
         ShowErrorMessage("File doesn't have Table of content");
         return;
     }
-    tocTree = CloneTocTree(tocTree, false);
+    TocItem* tocRoot = CloneTocItemRecur(tocTree->root, false);
     int nPages = engine->PageCount();
-    delete engine;
-    VbkmForFile* bookmarks = new VbkmForFile();
-    bookmarks->toc = tocTree;
-    bookmarks->filePath = strconv::WstrToUtf8(filePath).data();
-    bookmarks->nPages = nPages;
-    w->tocArgs->bookmarks.push_back(bookmarks);
+    tocRoot->engineFilePath = (char*)strconv::WstrToUtf8(filePath).data();
+    tocRoot->nPages = nPages;
 
+    const WCHAR* title = path::GetBaseNameNoFree(filePath);
+    TocItem* tocWrapper = new TocItem(tocRoot, title, 0);
+    tocWrapper->isOpenDefault = true;
+    tocWrapper->child = tocRoot;
+    w->tocArgs->bookmarks->tree->root->AddSibling(tocWrapper);
     UpdateTreeModel(w);
+
+    delete engine;
 }
 
 static void RemovePdf() {
+    // TDOO: NYI
+    CrashMe();
     TocEditorWindow* w = gWindow;
+#if 0
     TreeItem* sel = w->treeCtrl->GetSelection();
     CrashIf(!sel);
     size_t n = w->tocArgs->bookmarks.size();
@@ -210,6 +207,7 @@ static void RemovePdf() {
     CrashIf(!bkmToRemove);
     w->tocArgs->bookmarks.RemoveAt(toRemoveIdx);
     delete bkmToRemove;
+#endif
     UpdateTreeModel(w);
 }
 
@@ -217,13 +215,8 @@ static void UpdateRemovePdfButtonStatus(TocEditorWindow* w) {
     TreeItem* sel = w->treeCtrl->GetSelection();
     bool isEnabled = false;
     if (sel) {
-        TocItem* di = (TocItem*)sel;
-        TreeItem* p = di->Parent();
-        isEnabled = (p == nullptr); // enabled if top-level
-    }
-    // must have at least 2 PDFs to remove
-    if (w->tocArgs->bookmarks.size() < 2) {
-        isEnabled = 0;
+        TocItem* item = (TocItem*)sel;
+        isEnabled = (item->engineFilePath != nullptr);
     }
     w->btnRemovePdf->SetIsEnabled(isEnabled);
 }
@@ -233,12 +226,11 @@ extern void ShowExportedBookmarksMsg(const char* path);
 
 static void SaveVirtual() {
     TocEditorArgs* tocArgs = gWindow->tocArgs;
-    char* path = tocArgs->bookmarks[0]->filePath;
+    str::WStr pathw = tocArgs->filePath.get();
 
-    str::WStr pathw = strconv::Utf8ToWstr(path);
     // if the source was .vbkm file, we over-write it by default
     // any other format, we add .vbkm extension by default
-    if (!str::EndsWithI(path, ".vbkm")) {
+    if (!str::EndsWithI(pathw.Get(), L".vbkm")) {
         pathw.Append(L".vbkm");
     }
     WCHAR dstFileName[MAX_PATH]{0};
@@ -264,7 +256,7 @@ static void SaveVirtual() {
         return;
     }
     AutoFree patha = strconv::WstrToUtf8(dstFileName);
-    ok = ExportBookmarksToFile(tocArgs->bookmarks, "", patha);
+    ok = ExportBookmarksToFile(tocArgs->bookmarks->tree, "", patha);
     if (!ok) {
         return;
     }

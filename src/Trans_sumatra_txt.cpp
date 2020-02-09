@@ -6803,7 +6803,7 @@ const char * gTranslations_de =
   "\303\234ber &SumatraPDF\0"\
   "&Tats\303\244chliche Gr\303\266\303\237e\tStrg+1\0"\
   "&Mehr Optionen\342\200\246\0"\
-  "&Alle angegebenen Seiten\0"\
+  "&Alle ausgew\303\244hlten Seiten\0"\
   "&Zur\303\274ck\tAlt+<-\0"\
   "&Buchansicht\tStrg+8\0"\
   "&Schlie\303\237en\tStrg+W\0"\
@@ -6856,11 +6856,11 @@ const char * gTranslations_de =
   "(Seite %s)\0"\
   "\303\234ber SumatraPDF\0"\
   "Favoriten hinzuf\303\274gen\0"\
-  "Seite %s hinzuf\303\274gen\342\200\246\0"\
-  "\0"\
-  "Bezeichnung des Favoriten f\303\274r Seite %s (optional):\0"\
+  "Seite %s zu Favoriten hinzuf\303\274gen\342\200\246\0"\
+  "Seiten %s zu Favoriten hinzuf\303\274gen\tCtrl+B\0"\
+  "Seite %s zu Favoriten mit Namen (optional) hinzuf\303\274gen:\0"\
   "Zu Favoriten hinzuf\303\274gen\342\200\246\0"\
-  "Weiteres\0"\
+  "Erweitert\0"\
   "Alle Dateien\0"\
   "Alle unterst\303\274tzten Dokumente\0"\
   "Anwendung:\0"\
@@ -6879,11 +6879,11 @@ const char * gTranslations_de =
   "Keine Verbindung zum Internet m\303\266glich (Fehler %#x).\0"\
   "Abbrechen\0"\
   "Datei kann nicht gedruckt werden\0"\
-  "Fehler beim Ausf\303\274hren des Befehls f\303\274r die Inverssuche. Bitte \303\274berpr\303\274fen Sie die Einstellung.\0"\
+  "Fehler beim Ausf\303\274hren des Befehls f\303\274r die R\303\274ckw\303\244rtssuche. Bitte \303\274berpr\303\274fen Sie die Einstellung.\0"\
   "Sprache \303\244ndern (Change Language)\0"\
   "Nach &neuer Version suchen\0"\
   "Schlie\303\237en\0"\
-  "\0"\
+  "Alles schlie\303\237en\0"\
   "Comicb\303\274cher\0"\
   "Kompatibilit\303\244t\0"\
   "Fortlaufend\0"\
@@ -6908,7 +6908,7 @@ const char * gTranslations_de =
   "Konnte %s nicht kopieren\0"\
   "Erstellt am:\0"\
   "Aktuelle Datei\0"\
-  "Zeigerposition:\0"\
+  "Cursorposition:\0"\
   "&Zoomfaktor\342\200\246\tStrg+Y\0"\
   "Dunkel\0"\
   "Dunkler\0"\
@@ -6925,7 +6925,7 @@ const char * gTranslations_de =
   "Bitte Passwort f\303\274r %s eingeben\0"\
   "Beim Doppelklicken im PDF Dokument wird der folgende Befehl ausgef\303\274hrt:\0"\
   "Fehler beim \303\226ffnen von %s\0"\
-  "\0"\
+  "Alles \303\266ffnen\0"\
   "&Favoriten\0"\
   "Vor&w\303\244rts\tAlt+->\0"\
   "&Vollbild\tF11\0"\
@@ -6981,7 +6981,7 @@ const char * gTranslations_de =
   "Gro\303\237-/Kleinschreibung beachten\0"\
   "Kindle E-B\303\274cher\0"\
   "Ge\303\244ndert am:\0"\
-  "\0"\
+  "Neues Fenster\0"\
   "Es ist die neue Version %s vorhanden. M\303\266chten Sie diese herunterladen?\0"\
   "&N\303\244chste Seite\0"\
   "Suchbegriff nicht gefunden\0"\
@@ -7032,7 +7032,7 @@ const char * gTranslations_de =
   "Umbenennen zu\0"\
   "&Gegen UZS drehen\tStrg+Umschalt+-\0"\
   "Im &UZS drehen\tStrg+Umschalt++\0"\
-  "\0"\
+  "Anmerkungen speichern\0"\
   "Speichern unter\342\200\246\0"\
   "&Verkn\303\274pfung speichern\342\200\246\tStrg+Umschalt+S\0"\
   "Durchsuche Seite %d von %d\342\200\246\0"\
@@ -7043,14 +7043,14 @@ const char * gTranslations_de =
   "Auswahl:\0"\
   "Per &E-Mail versenden\342\200\246\0"\
   "Befehlszeile f\303\274r die Inverssuche setzen\0"\
-  "\0"\
-  "\0"\
+  "Lesezeichen anzeigen\0"\
+  "Favoriten anzeigen\0"\
   "Seiten &fortlaufend anzeigen\0"\
   "&Werkzeugleiste anzeigen\0"\
-  "\0"\
+  "Lesezeichen anzeigen\tF12\0"\
   "Favoriten anzeigen\0"\
   "Oft gelesene Dokumente einblenden\0"\
-  "\0"\
+  "Dokumet-&Ordner \303\266ffnen\0"\
   "&Lesezeichen standardm\303\244ssig anzeigen\0"\
   "Einzelne Seite\0"\
   "Entschuldigen Sie bitte dieses unerwartete Missgeschick!\n\nBitte dr\303\274cken Sie 'Abbrechen', wenn Sie uns beim Beheben dieses Fehlers behilflich sein m\303\266chten.\0"\
@@ -7091,7 +7091,7 @@ const char * gTranslations_de =
   "Verkleinern\0"\
   "Zoomfaktor\0"\
   "[Datei wurde ge\303\244ndert; aktualisiere\342\200\246] %s\0"\
-  "Text kopieren verweigert\0"\
+  "kopiere Text\0"\
   "Dokument drucken verweigert\0";
 
 const char * gTranslations_el = 
@@ -9165,7 +9165,7 @@ const char * gTranslations_ja =
   "\350\251\263\347\264\260\350\250\255\345\256\232(&A)\0"\
   "\343\201\231\343\201\271\343\201\246\343\201\256\351\201\270\346\212\236\343\201\225\343\202\214\343\201\237\343\203\232\343\203\274\343\202\270(&A)\0"\
   "\345\211\215\343\201\253\346\210\273\343\202\213(&B)\tAlt+\342\206\220\0"\
-  "\343\203\226\343\203\203\343\202\257 \343\203\223\343\203\245\343\203\274&(B)\tCtrl+B\0"\
+  "\343\203\226\343\203\203\343\202\257 \343\203\223\343\203\245\343\203\274(&B)\tCtrl+8\0"\
   "\351\226\211\343\201\230\343\202\213(&C)\tCtrl+W\0"\
   "\351\201\270\346\212\236\347\257\204\345\233\262\343\202\222\343\202\263\343\203\224\343\203\274(&C)\0"\
   "\351\201\270\346\212\236\347\257\204\345\233\262\343\201\256\343\202\263\343\203\224\343\203\274(&C)\tCtrl+C\0"\
@@ -9217,7 +9217,7 @@ const char * gTranslations_ja =
   "SumatraPDF \343\201\256\343\203\220\343\203\274\343\202\270\343\203\247\343\203\263\346\203\205\345\240\261\0"\
   "\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212\343\201\253\350\277\275\345\212\240\0"\
   "\343\203\232\343\203\274\343\202\270 %s \343\202\222\350\277\275\345\212\240\0"\
-  "\0"\
+  "\343\203\232\343\203\274\343\202\270 %s \343\202\222\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212\343\201\253\350\277\275\345\212\240\tCtrl+B\0"\
   "\343\203\232\343\203\274\343\202\270 %s \343\201\253\345\220\215\345\211\215\343\202\222\344\273\230\343\201\221\343\201\246\350\277\275\345\212\240\0"\
   "\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212\343\201\253\350\277\275\345\212\240\0"\
   "\350\251\263\347\264\260\350\250\255\345\256\232\0"\
@@ -9243,7 +9243,7 @@ const char * gTranslations_ja =
   "\350\250\200\350\252\236\343\201\256\345\244\211\346\233\264 (Change Language)\0"\
   "\346\233\264\346\226\260\343\201\256\343\203\201\343\202\247\343\203\203\343\202\257(&U)\0"\
   "\351\226\211\343\201\230\343\202\213\0"\
-  "\0"\
+  "\343\201\231\343\201\271\343\201\246\346\212\230\343\202\212\347\225\263\343\202\200\0"\
   "\343\203\236\343\203\263\343\202\254\346\234\254\0"\
   "\344\272\222\346\217\233\346\200\247\0"\
   "\351\200\243\347\266\232\0"\
@@ -9285,7 +9285,7 @@ const char * gTranslations_ja =
   "%s \343\201\256\343\203\221\343\202\271\343\203\257\343\203\274\343\203\211\343\202\222\345\205\245\345\212\233\343\201\227\343\201\276\343\201\231\0"\
   "PDF \343\203\211\343\202\255\343\203\245\343\203\241\343\203\263\343\203\210\344\270\212\343\201\247\343\203\200\343\203\226\343\203\253\343\202\257\343\203\252\343\203\203\343\202\257\343\201\227\343\201\237\343\201\250\343\201\215\343\201\253\345\221\274\343\201\263\345\207\272\343\201\231\343\202\263\343\203\236\343\203\263\343\203\211\343\203\251\343\202\244\343\203\263\343\202\222\345\205\245\345\212\233:\0"\
   "%s \343\201\256\350\252\255\343\201\277\350\276\274\343\201\277\343\201\253\345\244\261\346\225\227\0"\
-  "\0"\
+  "\343\201\231\343\201\271\343\201\246\345\261\225\351\226\213\0"\
   "\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212(&A)\0"\
   "\346\254\241\343\201\253\351\200\262\343\202\200(&O)\tAlt+\342\206\222\0"\
   "\345\205\250\347\224\273\351\235\242\350\241\250\347\244\272(&U)\tCtrl+Shift+L\0"\
@@ -9341,7 +9341,7 @@ const char * gTranslations_ja =
   "\345\244\247\346\226\207\345\255\227\343\201\250\345\260\217\346\226\207\345\255\227\343\202\222\345\214\272\345\210\245\343\201\231\343\202\213\0"\
   "Mobi \343\203\211\343\202\255\343\203\245\343\203\241\343\203\263\343\203\210\0"\
   "\345\244\211\346\233\264\346\227\245\346\231\202:\0"\
-  "\0"\
+  "\346\226\260\343\201\227\343\201\204\343\202\246\343\202\243\343\203\263\343\203\211\343\202\246 (&W)\tCtrl+N\0"\
   "\346\226\260\343\201\227\343\201\204\343\203\220\343\203\274\343\202\270\343\203\247\343\203\263 %s \343\201\214\345\210\251\347\224\250\345\217\257\350\203\275\343\201\247\343\201\231\343\200\202\346\226\260\343\201\227\343\201\204\343\203\220\343\203\274\343\202\270\343\203\247\343\203\263\343\202\222\343\203\200\343\202\246\343\203\263\343\203\255\343\203\274\343\203\211\343\201\227\343\201\276\343\201\231\343\201\213\357\274\237\0"\
   "\346\254\241\343\201\256\343\203\232\343\203\274\343\202\270\0"\
   "\344\270\200\350\207\264\343\201\214\350\246\213\343\201\244\343\201\213\343\202\212\343\201\276\343\201\233\343\202\223\343\201\247\343\201\227\343\201\237\0"\
@@ -9392,7 +9392,7 @@ const char * gTranslations_ja =
   "\345\220\215\345\211\215\343\201\256\345\244\211\346\233\264\345\220\215\0"\
   "\345\267\246\343\201\253\345\233\236\350\273\242(&L)\tCtrl+Shift+-\0"\
   "\345\217\263\343\201\253\345\233\236\350\273\242(&R)\tCtrl+Shift++\0"\
-  "\0"\
+  "\346\263\250\351\207\210\343\202\222\344\277\235\345\255\230\0"\
   "\345\220\215\345\211\215\343\202\222\344\273\230\343\201\221\343\201\246\344\277\235\345\255\230\0"\
   "\343\202\267\343\203\247\343\203\274\343\203\210\343\202\253\343\203\203\343\203\210\343\202\222\344\275\234\346\210\220(&H)...\tCtrl+Shift+S\0"\
   "%d (%d \344\270\255) \343\202\222\346\244\234\347\264\242\343\201\227\343\201\246\343\201\204\343\201\276\343\201\231...\0"\
@@ -9403,14 +9403,14 @@ const char * gTranslations_ja =
   "\0"\
   "\351\233\273\345\255\220\343\203\241\343\203\274\343\203\253\343\201\247\351\200\201\344\277\241(&E)...\0"\
   "\351\200\206\351\240\206\346\244\234\347\264\242\343\202\263\343\203\236\343\203\263\343\203\211\343\203\251\343\202\244\343\203\263\343\201\256\350\250\255\345\256\232\0"\
-  "\0"\
-  "\0"\
+  "\343\203\226\343\203\203\343\202\257\343\203\236\343\203\274\343\202\257\343\202\222\350\241\250\347\244\272(&B)\tF12\0"\
+  "\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212\343\202\222\350\241\250\347\244\272(&F)\0"\
   "\351\200\243\347\266\232\343\201\227\343\201\246\343\203\232\343\203\274\343\202\270\343\202\222\350\241\250\347\244\272(&P)\0"\
   "\343\203\204\343\203\274\343\203\253 \343\203\220\343\203\274\343\201\256\350\241\250\347\244\272(&T)\0"\
-  "\0"\
+  "\343\203\226\343\203\203\343\202\257\343\203\236\343\203\274\343\202\257\343\202\222\350\241\250\347\244\272 (&M)\tF12\0"\
   "\343\201\212\346\260\227\343\201\253\345\205\245\343\202\212\343\201\256\350\241\250\347\244\272\0"\
   "\343\202\210\343\201\217\350\252\255\343\202\200\343\203\225\343\202\241\343\202\244\343\203\253\344\270\200\350\246\247\343\202\222\350\241\250\347\244\272\0"\
-  "\0"\
+  "\343\203\225\343\202\251\343\203\253\343\203\200\343\202\222\350\241\250\347\244\272(&F)\0"\
   "\345\210\251\347\224\250\345\217\257\350\203\275\343\201\252\343\202\211\343\203\226\343\203\203\343\202\257\343\203\236\343\203\274\343\202\257 \343\202\265\343\202\244\343\203\211 \343\203\220\343\203\274\343\202\222\350\241\250\347\244\272(&B)\0"\
   "\345\215\230\344\270\200\343\201\256\343\203\232\343\203\274\343\202\270\0"\
   "\350\254\216\343\201\256\343\202\250\343\203\251\343\203\274\343\201\214\347\231\272\347\224\237\343\201\227\343\201\276\343\201\227\343\201\237\357\274\201\n\n\343\200\214\343\202\255\343\203\243\343\203\263\343\202\273\343\203\253\343\200\215\343\202\222\343\202\257\343\203\252\343\203\203\343\202\257\343\201\227\343\201\246\343\200\201\343\201\223\343\201\256\343\202\250\343\203\251\343\203\274\343\201\214\350\265\267\343\201\223\343\201\243\343\201\237\347\212\266\346\263\201\343\202\222\345\240\261\345\221\212\343\201\227\343\201\246\344\270\213\343\201\225\343\202\213\343\201\250\345\212\251\343\201\213\343\202\212\343\201\276\343\201\231\343\200\202\0"\
@@ -12702,12 +12702,12 @@ const char * gTranslations_pl =
 const char * gTranslations_br = 
   "Sobre\0"\
   "&Tamanho real\tCtrl+1\0"\
-  "Op\303\247\303\265es &Avan\303\247adas...\0"\
+  "Op\303\247\303\265es &avan\303\247adas\342\200\246\0"\
   "Tod&as as p\303\241ginas selecionadas\0"\
   "Voltar\tAlt+<-\0"\
-  "Visualizar como livro\tCtrl+8\0"\
+  "Ver como livro\tCtrl+8\0"\
   "&Fechar\tCtrl+W\0"\
-  "&Copiar Sele\303\247\303\243o\0"\
+  "&Copiar sele\303\247\303\243o\0"\
   "Copiar sele\303\247\303\243o\tCtrl+C\0"\
   "N\303\243o perguntar novamente\0"\
   "Apenas as p\303\241ginas par&es\0"\
@@ -12748,18 +12748,18 @@ const char * gTranslations_br =
   "Ignorar esta vers\303\243o\0"\
   "&Tema\0"\
   "&Usar tamanhos de p\303\241gina originais\0"\
-  "&Ver\0"\
+  "&Exibir\0"\
   "&Janela\0"\
   "&Sim\0"\
   "\0"\
   "(de %d)\0"\
   "(p\303\241gina %s)\0"\
   "Sobre o SumatraPDF\0"\
-  "Adicionar aos Favoritos\0"\
-  "Adicionar p\303\241gina %s aos Favoritos\0"\
-  "\0"\
-  "Adicionar p\303\241gina %s aos Favoritos com outro nome (opcional):\0"\
-  "Adicionar aos Favoritos\0"\
+  "Adicionar aos favoritos\0"\
+  "Adicionar p\303\241gina %s aos favoritos\0"\
+  "Adicionar p\303\241gina %s aos favoritos\tCtrl+B\0"\
+  "Adicionar p\303\241gina %s aos favoritos com outro nome (opcional):\0"\
+  "Adicionar aos favoritos\0"\
   "Avan\303\247ado\0"\
   "Todos os arquivos\0"\
   "Todos os documentos suportados\0"\
@@ -12771,7 +12771,7 @@ const char * gTranslations_br =
   "Autom\303\241tico\0"\
   "&Procurar atualiza\303\247\303\265es automaticamente\0"\
   "Ver como livro\0"\
-  "Atalhos de Favoritos\0"\
+  "Atalhos de marcadores\0"\
   "Atalho para a p\303\241gina %s de %s\0"\
   "Marcadores\0"\
   "\0"\
@@ -12783,20 +12783,20 @@ const char * gTranslations_br =
   "Mudar o idioma (Change Language)\0"\
   "Procurar Atualiza\303\247\303\265es\0"\
   "Fechar\0"\
-  "\0"\
+  "Minimizar tudo\0"\
   "Quadrinhos\0"\
   "Compatibilidade\0"\
   "Cont\303\255nuo\0"\
   "Ver como livro cont\303\255nuo\0"\
   "P\303\241gina dupla cont\303\255nua\0"\
-  "\0"\
-  "Copiar &Imagem\0"\
-  "Copiar Ata&lho\0"\
-  "Copiar Co&ment\303\241rio\0"\
+  "Contribua com a tradu\303\247\303\243o\0"\
+  "Copiar &imagem\0"\
+  "Copiar ata&lho\0"\
+  "Copiar co&ment\303\241rio\0"\
   "C\303\263pia de texto negada (copiando somente como imagem)\0"\
   "Direito autoral:\0"\
-  "N\303\243o foi poss\303\255vel obter as propriedades da Impressora\0"\
-  "N\303\243o foi poss\303\255vel criar a pasta de instala\303\247\303\243o.\0"\
+  "N\303\243o foi poss\303\255vel obter as propriedades da impressora\0"\
+  "N\303\243o foi poss\303\255vel criar a pasta de instala\303\247\303\243o\0"\
   "N\303\243o foi poss\303\255vel acionar a impressora\0"\
   "N\303\243o foi poss\303\255vel instalar o pr\303\251-visualizador para PDF\0"\
   "N\303\243o foi poss\303\255vel instalar o filtro de pesquisa para PDF\0"\
@@ -12825,7 +12825,7 @@ const char * gTranslations_br =
   "Digite a senha de %s\0"\
   "Digite a linha de comando a ser invocada com um duplo clique sobre o documento PDF:\0"\
   "Erro ao carregar %s\0"\
-  "\0"\
+  "Expandir tudo\0"\
   "&Favoritos\0"\
   "Avan\303\247ar\tAlt+->\0"\
   "Tela cheia\tCtrl+Shift+L\0"\
@@ -12881,7 +12881,7 @@ const char * gTranslations_br =
   "Diferenciar min\303\272sculas e mai\303\272sculas\0"\
   "Documentos Mobi\0"\
   "Modificado:\0"\
-  "\0"\
+  "Novo &window\tCtrl+N\0"\
   "A vers\303\243o %s est\303\241 dispon\303\255vel. Baixar a nova vers\303\243o?\0"\
   "P\303\241gina seguinte\0"\
   "Nenhuma ocorr\303\252ncia encontrada\0"\
@@ -12927,12 +12927,12 @@ const char * gTranslations_br =
   "Problema de impress\303\243o.\0"\
   "Re&nomear...\tF2\0"\
   "&Lembrar arquivos abertos\0"\
-  "Remover dos Favoritos\0"\
-  "Remover p\303\241gina %s dos Favoritos\0"\
+  "Remover dos favoritos\0"\
+  "Remover p\303\241gina %s dos favoritos\0"\
   "Renomear para\0"\
   "Girar \303\240 esquerda\tCtrl+Shift+-\0"\
   "Girar \303\240 direita\tCtrl+Shift++\0"\
-  "\0"\
+  "Salvar anota\303\247\303\265es\0"\
   "Salvar como\0"\
   "S&alvar atalho...\tCtrl+Shift+S\0"\
   "Localizando %d de %d...\0"\
@@ -12943,14 +12943,14 @@ const char * gTranslations_br =
   "Sele\303\247\303\243o:\0"\
   "Enviar por email...\0"\
   "Configurar pesquisa inversa\0"\
-  "\0"\
-  "\0"\
+  "Mostrar &marcadores\tF12\0"\
+  "Mostrar &favoritos\0"\
   "Exibir p\303\241ginas de modo cont\303\255nuo\0"\
   "Mostrar barra de ferramentas\0"\
-  "\0"\
-  "Mostrar Favoritos\0"\
+  "Mostrar &marcadores\tF12\0"\
+  "Mostrar favoritos\0"\
   "Mostrar Lidos com freq\303\274\303\252ncia\0"\
-  "\0"\
+  "Mostrar na &pasta\0"\
   "Mostrar barra lateral de marcadores quando dispon\303\255vel\0"\
   "P\303\241gina \303\272nica\0"\
   "Desculpe, isso n\303\243o deveria ter acontecido!\n\nAperte 'Cancelar' se quiser nos ajudar a corrigir a causa deste erro.\0"\
@@ -12976,7 +12976,7 @@ const char * gTranslations_br =
   "T\303\255tulo:\0"\
   "Desinstalar SumatraPDF\0"\
   "A desinstala\303\247\303\243o falhou\0"\
-  "Desinstala\303\247\303\243o em progresso...\0"\
+  "Desinstala\303\247\303\243o em progresso\342\200\246\0"\
   "Arquivo fonte desconhecido (%s)\0"\
   "Usar &abas\0"\
   "Usar o SumatraPDF como o leitor PDF pa&dr\303\243o\0"\
@@ -12989,7 +12989,7 @@ const char * gTranslations_br =
   "\0"\
   "Aumentar zoom\0"\
   "Diminuir zoom\0"\
-  "Propor\303\247\303\243o de Zoom\0"\
+  "Propor\303\247\303\243o de zoom\0"\
   "[Mudan\303\247as detectadas; atualizando] %s\0"\
   "copiando texto\0"\
   "imprimindo documento\0";

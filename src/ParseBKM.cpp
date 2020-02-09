@@ -20,6 +20,8 @@
 // TODO: this is provisional version while in development
 constexpr char* kBkmVersion = "999";
 
+static Kind kindTocItem = "bkmTreeItem";
+
 /*
 Creating and parsing of .bkm files that contain alternative bookmarks view
 for PDF files.
@@ -27,13 +29,8 @@ for PDF files.
 
 using sv::ParsedKV;
 
-VbkmForFile::~VbkmForFile() {
-    delete toc;
-    delete engine;
-}
-
 VbkmFile::~VbkmFile() {
-    DeleteVecMembers(vbkms);
+    delete tree;
 }
 
 static std::string_view readFileNormalized(std::string_view path) {
@@ -74,11 +71,26 @@ static void SerializeDest(PageDestination* dest, str::Str& s) {
     s.AppendFmt(" rect:%g,%g,%g,%g", r.x, r.y, r.dx, r.dy);
 }
 
+static const char maxIndentStr[] = "                                                                             ";
+constexpr int maxIndent = (dimof(maxIndentStr) - 1) / 2;
+
+static std::string_view getIndentStr(int n) {
+    CrashIf(n > maxIndent);
+    return {maxIndentStr, (size_t)n * 2};
+}
+
 static void SerializeBookmarksRec(TocItem* node, int level, str::Str& s) {
+    std::string_view indentStr = getIndentStr(level);
     while (node) {
-        for (int i = 0; i < level; i++) {
-            s.Append("  ");
+        if (node->engineFilePath) {
+            s.AppendView(indentStr);
+            s.AppendFmt("file: %s\n", node->engineFilePath);
+            CrashIf(node->nPages == 0);
+            s.AppendView(indentStr);
+            s.AppendFmt("pages: %d\n", node->nPages);
         }
+
+        s.AppendView(indentStr);
         WCHAR* title = node->Text();
         AutoFree titleA = strconv::WstrToUtf8(title);
         sv::AppendMaybeQuoted(titleA.as_view(), s);
@@ -127,14 +139,10 @@ static void SerializeBookmarksRec(TocItem* node, int level, str::Str& s) {
 static TocItem* parseTocLine(std::string_view line, size_t* indentOut) {
     auto origLine = line; // save for debugging
 
-    // lines might start with an indentation, 2 spaces for one level
-    // TODO: maybe also count tabs as one level?
-    size_t indent = sv::SkipChars(line, ' ');
-    // must be multiple of 2
-    if (indent % 2 != 0) {
+    *indentOut = sv::ParseIndent(line);
+    if (*indentOut < 0) {
         return nullptr;
     }
-    *indentOut = indent / 2;
 
     // first item on the line is a title
     str::Str title;
@@ -255,27 +263,9 @@ TocItemWithIndent::TocItemWithIndent(TocItem* item, size_t indent) {
     this->indent = indent;
 }
 
-static bool parseVbkmSection(std::string_view sv, Vec<VbkmForFile*>& bkmsOut) {
+static TocTree* parseVbkm(std::string_view sv) {
     Vec<TocItemWithIndent> items;
 
-    auto* bkm = new VbkmForFile();
-
-    // first line should be "file: $file"
-    auto file = sv::ParseValueOfKey(sv, "file", true);
-    if (!file.ok) {
-        return false;
-    }
-
-    // second line should be "pages: $nPages"
-    auto nPagesV = sv::ParseValueOfKey(sv, "pages", true);
-    if (!nPagesV.ok) {
-        return false;
-    }
-    bkm->nPages = 0;
-    str::Parse(nPagesV.val, "%d", &bkm->nPages);
-    if (bkm->nPages == 0) {
-        return false;
-    }
 #if 0
     // this line should be "title: $title"
     auto title = sv::ParseValueOfKey(sv, "title", true);
@@ -283,23 +273,37 @@ static bool parseVbkmSection(std::string_view sv, Vec<VbkmForFile*>& bkmsOut) {
         return false;
     }
 #endif
-    auto tree = new TocTree();
-    // tree->name = str::Dup(title.val);
     size_t indent = 0;
     std::string_view line;
     while (true) {
+        // optional line "file: $file"
+        ParsedKV file = sv::TryParseValueOfKey(sv, "file", true);
+        // second line should be "pages: $nPages"
+        ParsedKV nPagesV = sv::TryParseValueOfKey(sv, "pages", true);
+        int nPages = 0;
+        if (nPagesV.ok) {
+            str::Parse(nPagesV.val, "%d", &nPages);
+            if (nPages == 0) {
+                return false;
+            }
+        }
+
         line = sv::ParseUntil(sv, '\n');
         if (line.empty()) {
             break;
         }
-        auto* item = parseTocLine(line, &indent);
+        TocItem* item = parseTocLine(line, &indent);
         if (item == nullptr) {
             for (auto& el : items) {
                 delete el.item;
             }
-            delete tree;
-            return false;
+            return nullptr;
         }
+        if (file.ok) {
+            item->engineFilePath = file.val;
+            file.val = nullptr;
+        }
+        item->nPages = nPages;
         TocItemWithIndent iwl = {item, indent};
         items.Append(iwl);
     }
@@ -308,10 +312,11 @@ static bool parseVbkmSection(std::string_view sv, Vec<VbkmForFile*>& bkmsOut) {
         for (auto& el : items) {
             delete el.item;
         }
-        delete tree;
-        return false;
+        return nullptr;
     }
 
+    TocTree* tree = new TocTree();
+    // tree->name = str::Dup(title.val);
     tree->root = items[0].item;
 
     /* We want to reconstruct tree from array
@@ -348,13 +353,12 @@ static bool parseVbkmSection(std::string_view sv, Vec<VbkmForFile*>& bkmsOut) {
         }
     }
 
+#if 0
     bkm->filePath = file.val;
     file.val = nullptr; // take ownership
+#endif
 
-    bkm->toc = tree;
-    bkmsOut.Append(bkm);
-
-    return true;
+    return tree;
 }
 
 // TODO: read more than one VbkmFile by trying multiple .1.bkm, .2.bkm etc.
@@ -380,60 +384,19 @@ bool LoadAlterenativeBookmarks(std::string_view baseFileName, VbkmFile& vbkm) {
         name.val = nullptr;
     }
 
-    bool ok = parseVbkmSection(sv, vbkm.vbkms);
-    return ok;
+    vbkm.tree = parseVbkm(sv);
+    return vbkm.tree != nullptr;
 }
 
-bool ExportBookmarksToFile(const Vec<VbkmForFile*>& bookmarks, const char* name, const char* bkmPath) {
+bool ExportBookmarksToFile(TocTree* bookmarks, const char* name, const char* bkmPath) {
     str::Str s;
     s.AppendFmt("version: %s\n", kBkmVersion);
     if (str::IsEmpty(name)) {
         name = "default view";
     }
     s.AppendFmt("name: %s\n", name);
-    for (auto&& vbkm : bookmarks) {
-        const char* path = vbkm->filePath;
-        CrashIf(!path);
-        s.AppendFmt("file: %s\n", path);
-        CrashIf(vbkm->nPages < 1);
-        s.AppendFmt("pages: %d\n", vbkm->nPages);
-        TocTree* tocTree = vbkm->toc;
-        SerializeBookmarksRec(tocTree->root, 0, s);
-    }
+    SerializeBookmarksRec(bookmarks->root, 0, s);
     return file::WriteFile(bkmPath, s.as_view());
-}
-
-// each logical record starts with "file:" line
-// we split s into list of records for each file
-// TODO: should we fail if the first line is not "file:" ?
-// Currently we ignore everything from the beginning
-// until first "file:" line
-static Vec<std::string_view> SplitVbkmIntoSectons(std::string_view s) {
-    Vec<std::string_view> res;
-    auto tmp = s;
-    Vec<const char*> addrs;
-
-    // find indexes of lines that start with "file:"
-    while (!tmp.empty()) {
-        auto line = sv::ParseUntil(tmp, '\n');
-        if (sv::StartsWith(line, "file:")) {
-            addrs.push_back(line.data());
-        }
-    }
-
-    size_t n = addrs.size();
-    if (n == 0) {
-        return res;
-    }
-    addrs.push_back(s.data() + s.size());
-    for (size_t i = 0; i < n; i++) {
-        const char* start = addrs[i];
-        const char* end = addrs[i + 1];
-        size_t size = end - start;
-        auto sv = std::string_view{start, size};
-        res.push_back(sv);
-    }
-    return res;
 }
 
 bool ParseVbkmFile(std::string_view sv, VbkmFile& vbkm) {
@@ -452,20 +415,8 @@ bool ParseVbkmFile(std::string_view sv, VbkmFile& vbkm) {
     vbkm.name = name.val;
     name.val = nullptr;
 
-    auto records = SplitVbkmIntoSectons(sv);
-    auto n = records.size();
-    if (n == 0) {
-        return false;
-    }
-
-    for (size_t i = 0; i < n; i++) {
-        std::string_view rd = records[i];
-        bool ok = parseVbkmSection(rd, vbkm.vbkms);
-        if (!ok) {
-            return false;
-        }
-    }
-    return true;
+    vbkm.tree = parseVbkm(sv);
+    return vbkm.tree != nullptr;
 }
 
 bool LoadVbkmFile(const char* filePath, VbkmFile& vbkm) {

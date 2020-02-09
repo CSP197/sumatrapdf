@@ -229,6 +229,7 @@ TocItem::~TocItem() {
     free(title);
     free(rawVal1);
     free(rawVal2);
+    free(engineFilePath);
 }
 
 void TocItem::AddSibling(TocItem* sibling) {
@@ -287,6 +288,9 @@ TocItem* CloneTocItemRecur(TocItem* ti, bool removeUnchecked) {
     res->dest = clonePageDestination(ti->dest);
     res->child = CloneTocItemRecur(ti->child, removeUnchecked);
 
+    res->nPages = ti->nPages;
+    res->engineFilePath = str::Dup(ti->engineFilePath);
+
     TocItem* next = ti->next;
     if (removeUnchecked) {
         while (next && next->isUnchecked) {
@@ -294,12 +298,6 @@ TocItem* CloneTocItemRecur(TocItem* ti, bool removeUnchecked) {
         }
     }
     res->next = CloneTocItemRecur(next, removeUnchecked);
-    return res;
-}
-
-TocTree* CloneTocTree(TocTree* tree, bool removeUnchecked) {
-    TocTree* res = new TocTree();
-    res->root = CloneTocItemRecur(tree->root, removeUnchecked);
     return res;
 }
 
@@ -382,6 +380,28 @@ TreeItem* TocTree::RootAt(int n) {
         node = node->next;
     }
     return node;
+}
+
+TocTree* CloneTocTree(TocTree* tree, bool removeUnchecked) {
+    TocTree* res = new TocTree();
+    res->root = CloneTocItemRecur(tree->root, removeUnchecked);
+    return res;
+}
+
+// TODO: speed up by removing recursion 
+bool VisitTocTree(TocItem* ti, const std::function<bool(TocItem*)>& f) {
+    bool cont;
+    while (ti) {
+        cont = f(ti);
+        if (cont && ti->child) {
+            cont = VisitTocTree(ti->child, f);
+        }
+        if (!cont) {
+            return false;
+        }
+        ti = ti->next;
+    }
+    return true;
 }
 
 RenderPageArgs::RenderPageArgs(int pageNo, float zoom, int rotation, RectD* pageRect, RenderTarget target,

@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-c5145fab2775310187da61b39eb32121723ee49d
+a757ac33ccdb30169217bea43d3bd0c700c5a384
 :&About
 af:&Omtrent
 am:&Ծրագրի մասին
@@ -148,7 +148,7 @@ ar:خيارات &متقدمة
 az:&Əlavə seçimlər...
 bg:Разширени опции
 bn:আরো উন্নত অপশন 
-br:Opções &Avançadas...
+br:Opções &avançadas…
 bs:N&apredne opcije...
 by:П&ашыраныя налады
 ca-xv:Opcions &avançades...
@@ -221,7 +221,7 @@ cn:所有已选定页面(&A)
 co:&Tutte e pagine selezziunate
 cy:&Pob tudalen â ddewiswyd
 cz:Vše&chny vybrané stránky
-de:&Alle angegebenen Seiten
+de:&Alle ausgewählten Seiten
 dk:&Alle valgte sider
 el:Ό&λες οι επιλεγμένες
 es:Tod&as las páginas seleccionadas
@@ -346,7 +346,7 @@ ar:عرض &الكتاب
 az:&Kitab formatı\tCtrl+8
 bg:&Изглед като книга\tCtrl+8
 bn:&বই-এর মত সজ্জা\টি কন্ট্রোল + ৮
-br:Visualizar como livro\tCtrl+8
+br:Ver como livro\tCtrl+8
 bs:&Knjiški pregled\tCtrl+8
 by:Выгляд як &Кніга\tCtrl+8
 ca-xv:Visualització de &llibre\tCtrl+8
@@ -372,7 +372,7 @@ hr:&Knjiški pregled\tCtrl+8
 hu:&Könyv-mód (oldalpár címlappal)\tCtrl+8
 id:Tampilan &Buku\tCtrl+8
 it:Vista &libro\tCtrl+8
-ja:ブック ビュー&(B)\tCtrl+B
+ja:ブック ビュー(&B)\tCtrl+8
 jv:&Tampilan Buku\tCtrl+8
 ka:&წიგნის რეჟიმი\tCtrl+8
 kr:책처럼 보기(&B)\tCtrl+8
@@ -480,7 +480,7 @@ ar:نسخ المحدد&
 az:Seçilmiş sahəni &kopyala
 bg:&Копиране на избраното
 bn:&নির্বাচিত অংশ কপি করুন
-br:&Copiar Seleção
+br:&Copiar seleção
 bs:&Kopiraj označeno
 by:&Капіяваць выбранае
 ca-xv:&Copia la selecció
@@ -3137,7 +3137,7 @@ ar:&العرض
 az:&Görüntü
 bg:&Изглед
 bn:দর্শন
-br:&Ver
+br:&Exibir
 bs:&Prikaz
 by:Выгляд
 ca-xv:&Visualitza
@@ -3592,7 +3592,7 @@ ar:اضافة للمفضلة
 az:Seçilmişlərə əlavə et
 bg:Добавяне към любимите
 bn:প্রিয় যোগ করুন
-br:Adicionar aos Favoritos
+br:Adicionar aos favoritos
 bs:Dodaj favorit
 by:Дадаць у Лепшыя Закладкі
 ca-xv:Afegix un preferit
@@ -3660,7 +3660,7 @@ ar:الى المفضلة %s اضافة صفحة
 az:%s. səhifəni seçilmişlərə əlavə et
 bg:Добавяне на страница %s към любимите
 bn:এই পাতাটিকে %s প্রিয়তে যোগ করুন
-br:Adicionar página %s aos Favoritos
+br:Adicionar página %s aos favoritos
 bs:Dodaj stranicu %s u favorite
 by:Дадаць старонку %s у лепшыя закладкі
 ca-xv:Afegix la pàgina %s als preferits
@@ -3669,7 +3669,7 @@ cn:添加第 %s 页到收藏夹
 co:Aghjunghje a pagina %s à i favuriti
 cy:Ychwanegu tudalen %s i'r Ffefrynnau
 cz:Přidat stránku %s k oblíbeným...
-de:Seite %s hinzufügen…
+de:Seite %s zu Favoriten hinzufügen…
 dk:Tilføj side %s til bogmærker
 el:Προσθήκη της σελίδας %s στα αγαπημένα
 es:Añadir página %s a favoritos
@@ -3725,7 +3725,7 @@ ar:(الى المفضلة مع  اسم (إختياري %s اضافة صفحة:
 az:%s. səhifəni bu (istənilən) adla seçilmişlərə əlavə et:
 bg:Добавяне на страница %s към любимите с име (по избор):
 bn:%s পেইজটাকে প্রিয়তে যোগ করুন নাম সহ (ইচ্ছাকৃত) 
-br:Adicionar página %s aos Favoritos com outro nome (opcional):
+br:Adicionar página %s aos favoritos com outro nome (opcional):
 bs:Dodaj stranicu %s u favorite sa (opcionalnim) nazivom:
 by:Дадаць старонку %s у лепшыя закладкі з (калі патрэбна) імянем:
 ca-xv:Afegix la pàgina %s als preferits amb el nom (opcional):
@@ -3734,7 +3734,7 @@ cn:以 (可选) 名称添加第 %s 页到收藏夹:
 co:Aghjunghje a pagina %s à i favuriti cù u nome (ozzionale) :
 cy:Ychwanegu tudalen %s i'r ffefrynnau gyda'r enw (dewisiol):
 cz:Přidat stránku %s k oblíbeným s (volitelným) názvem:
-de:Bezeichnung des Favoriten für Seite %s (optional):
+de:Seite %s zu Favoriten mit Namen (optional) hinzufügen:
 dk:Tilføj side %s til bogmærker med (valgfrit) navn:
 el:Προσθήκη σελίδας %s στα αγαπημένα με (προαιρετικό) όνομα:
 es:Añadir página %s a favoritos con nombre (opcional):
@@ -3785,10 +3785,13 @@ uz:%s betni Tanlanganlarga (boshqa) nom bilan qo'shish:
 vn:Thêm trang %s vào Ưa thích với tên (tùy chọn):
 :Add page %s to favorites\tCtrl+B
 az:%s. səhifəni seçilmişlərə əlavə et\tCtrl+B
+br:Adicionar página %s aos favoritos\tCtrl+B
 cn:将第 %s 页添加到收藏夹\tCtrl+B
+de:Seiten %s zu Favoriten hinzufügen\tCtrl+B
 es:Añadir página %s a favoritos\tCtrl+B
 fr:Ajouter cette page aux %s favoris\tCtrl+B
 ga:Cuir leathanach %s leis na ceanáin\tCtrl+B
+ja:ページ %s をお気に入りに追加\tCtrl+B
 lv:Pievienot %s lappusi grāmatzīmēm\tCtrl+B
 nl:Pagina %s toevoegen aan favorieten\tCtrl+B
 pt:Adicionar página %s aos favoritos\tCtrl+B
@@ -3800,7 +3803,7 @@ ar:اضافة للمفضلة
 az:Seçilmişlərə əlavə et
 bg:Добавяне към любимите
 bn:পছন্দের মধ্যে অন্তর্ভুক্ত করুন
-br:Adicionar aos Favoritos
+br:Adicionar aos favoritos
 bs:Dodaj u favorite
 by:Дадаць у лепшыя закладкі
 ca-xv:Afegix als preferits
@@ -3876,7 +3879,7 @@ cn:高级
 co:Espertu
 cy:Uwch
 cz:Upřesnit
-de:Weiteres
+de:Erweitert
 dk:Avanceret
 el:Προχωρημένα
 es:Avanzado
@@ -4614,7 +4617,7 @@ ar:اختصارات قائمة العناوين
 az:Əlfəcin yarlıkları
 bg:Кратък път към отметки
 bn:পুস্তক-চিহ্ন শর্টকাট
-br:Atalhos de Favoritos
+br:Atalhos de marcadores
 bs:Kratice zabilješki
 by:Спасылкі закладак
 ca-xv:Dreceres de marcadors
@@ -5152,7 +5155,7 @@ cn:无法进行逆向搜索。请检查设置数值里的命令栏。
 co:Ùn pò micca lancià a cumanda di ricerca à l’arritrosa. Ci vole à verificà a linea di cumanda in e preferenze.
 cy:Methu cychwyn gorchymyn chwilio gwrthdro. Gwiriwch y linell orchymyn yn y gosodiadau
 cz:Příkaz inverzní hledání nelze spustit. Zkontrolujte nastavení příkazového řádku.
-de:Fehler beim Ausführen des Befehls für die Inverssuche. Bitte überprüfen Sie die Einstellung.
+de:Fehler beim Ausführen des Befehls für die Rückwärtssuche. Bitte überprüfen Sie die Einstellung.
 dk:Kan ikke starte søgekommandoen invers. Kontroller venligst kommandolinjen i indstillingerne.
 el:Δεν είναι δυνατή η εκκίνηση αντίστροφης αναζήτησης. Παρακαλώ ελέγξτε τη γραμμή εντολών στις ρυθμίσεις.
 es:No se puede iniciar la orden de búsqueda inversa. Compruebe la línea de órdenes en la configuración.
@@ -5410,13 +5413,16 @@ uz:Yopish
 vn:Đóng lại
 :Collapse All
 az:Hamısını bağla
+br:Minimizar tudo
 cn:全部折叠(&C)
 co:Piegà tuttu
 cz:Sbalit vše
+de:Alles schließen
 es:Ocultar Todo
 fr:Tout réduire
 ga:Laghdaigh Gach
 it:Comprimi tutto
+ja:すべて折り畳む
 lv:Sakļaut visu
 nl:Alle Samenvouwen
 pt:Recolher tudo
@@ -5765,7 +5771,7 @@ ar:ساهم بالترجمة
 az:Tərcüməyə kömək et
 bg:Допринеси за превода
 bn:অনুবাদ প্রদান করুন
-br:Contribute Translation
+br:Contribua com a tradução
 bs:Pomozi prijevodom
 by:Дапамагчы з перакладам
 ca-xv:Contribuïu en la traducció
@@ -5834,7 +5840,7 @@ ar:نسخ &الصورة
 az:&Şəkli kopyala
 bg:Копиране на &изображението
 bn:&ছবি কপি করুন
-br:Copiar &Imagem
+br:Copiar &imagem
 bs:Kopiraj &sliku
 by:Кап&іяваць Малюнак
 ca-xv:Copia la &imatge
@@ -5899,7 +5905,7 @@ ar:نسخ &رابط العنوان
 az:Keçidin &ünvanını kopyala
 bg:Копиране на интернет &адреса
 bn:কপি & লিঙ্ক অ্যাড্রেস 
-br:Copiar Ata&lho
+br:Copiar ata&lho
 bs:Kopiraj adresu &linka
 by:Капіяваць адрас &спасылкі
 ca-xv:Copia l'adreça de l'enllaç
@@ -5963,7 +5969,7 @@ ar:نسخ ال&تعليق
 az:&Şərhi kopyala
 bg:Копиране на &коментара
 bn:মতামত কপি হোক
-br:Copiar Co&mentário
+br:Copiar co&mentário
 bs:Kopiraj ko&mentar
 by:Капіяваць Ка&ментар
 ca-xv:Copia el co&mentari
@@ -6157,7 +6163,7 @@ ar:تعذر الحصول على خصائص الطابعة
 az:Printer xüsusiyyətlərini müəyyən etmək mümkün olmadı
 bg:Настройките на принтера не са намерени
 bn:মুদ্রণ যন্ত্রের প্রোপারটিজ অর্জন করা সম্ভব হয়নি
-br:Não foi possível obter as propriedades da Impressora
+br:Não foi possível obter as propriedades da impressora
 bs:Ne mogu dobaviti postavke štampača
 by:Не атрымалася адкрыць Налады друку
 ca-xv:No es poden obtindre les propietats de la impressora
@@ -6220,7 +6226,7 @@ ar:لا يمكن إنشاء دليل التثبيت
 az:Quraşdırma qovluğunu yaratmaq mümkün olmadı
 bg:Не може да се създаде директория за инсталация
 bn:ইন্সটলএসন ডিরেক্টরি প্রস্তুত করা সম্ভব হয়নি
-br:Não foi possível criar a pasta de instalação.
+br:Não foi possível criar a pasta de instalação
 bs:Neuspješno kreiranje instalacijskog direktorija
 by:Немагчыма стварыць каталог для ўсталёўкі
 ca-xv:No es pot crear el directori d'instal·lació
@@ -6973,7 +6979,7 @@ cn:光标位置:
 co:Pusizione di u cursore :
 cy:Safle'r cyrchwr:
 cz:Pozice kurzoru:
-de:Zeigerposition:
+de:Cursorposition:
 dk:Markørposition:
 el:Θέση κέρσορα:
 es:Posición del cursor:
@@ -8045,13 +8051,16 @@ uz:%s yuklab olish xatosi
 vn:Không mở %s được
 :Expand All
 az:Hamısını aç
+br:Expandir tudo
 cn:全部展开
 co:Spiegà tuttu
 cz:Rozbalit vše
+de:Alles öffnen
 es:Expandir Todo
 fr:Tout développer
 ga:Leathnaigh Gach
 it:Espandi tutto
+ja:すべて展開
 lv:Izvērst visu
 nl:Alle Uitvouwen
 pt:Expandir tudo
@@ -11581,12 +11590,15 @@ uz:O'zgartirilgan:
 vn:Ngày chỉnh sửa
 :New &window\tCtrl+N
 az:Yeni pə&ncərə\tCtrl+N
+br:Novo &window\tCtrl+N
 cn:新建窗口(&W)\tCtrl+N
 co:No&va finestra\tCtrl+N
 cz:Nové &okno\tCtrl+N
+de:Neues Fenster
 es:Nueva &ventana\tCtrl+N
 fr:Nouvelle &fenêtre\tCtrl+N
 ga:Fuinneog &nua\tCtrl+N
+ja:新しいウィンドウ (&W)\tCtrl+N
 lv:Jauns &logs\tCtrl+N
 nl:Nieuw venster\tCrtl+N
 pt:Nova &janela\tCtrl+N
@@ -14463,7 +14475,7 @@ ar:ازالة من المفضلة
 az:Seçilmişlərdən sil
 bg:Премахни от любимите
 bn:পছন্দের তালিকা থেকে বাদ দিন
-br:Remover dos Favoritos
+br:Remover dos favoritos
 bs:Ukloni iz favorita
 by:Выдаліць з лепшых закладак
 ca-xv:Suprimeix dels preferits
@@ -14523,7 +14535,7 @@ am:Հեռացնել %s  էջը ընտրյալներից
 ar:حذف الصفحة %s من المفضلة
 az:%s. səhifəni seçilmişlərdən sil
 bg:Премахни страница %s от любимите
-br:Remover página %s dos Favoritos
+br:Remover página %s dos favoritos
 bs:Ukloni stranicu %s iz favorita
 by:Выдаліць старонку %s з лепшых закладак
 ca-xv:Suprimeix la pàgina %s dels preferits
@@ -14785,10 +14797,13 @@ uz:&O'ngga burish\tCtrl+Shift++
 vn:Quay phải\tCtrl+Shift++
 :Save Annotations
 az:Annotasiyaları yadda saxla
+br:Salvar anotações
 cn:保存注释
+de:Anmerkungen speichern
 es:Guardar Notas
 fr:Sauvegarder les annotations
 ga:Taisc na Nótaí
+ja:注釈を保存
 lv:Saglabāt anotācijas
 nl:Aantekeningen Opslaan
 pt:Guardar anotações
@@ -15426,10 +15441,13 @@ uz:Teskari qidirish buyruq satrini moslash
 vn:Đặt dòng lệnh tìm kiếm ngược
 :Show &Bookmarks\tF12
 az:Əl&fəcinləri göstər\tF12
+br:Mostrar &marcadores\tF12
 cn:显示书签(&B)\tF12
+de:Lesezeichen anzeigen
 es:Mostrar Marcadores\tF12
 fr:Afficher les &signets\tF12
 ga:Taispeáin na &Leabharmharcanna\tF12
+ja:ブックマークを表示(&B)\tF12
 lv:Rādīt &grāmatzīmes\tF12
 nl:Toon Bladwijzers\tF12
 pt:Mostrar &marcadores\tF12
@@ -15437,10 +15455,13 @@ ru:Показать за&кладки\tF12
 tw:顯示書籤(&B)\tF12
 :Show &Favorites
 az:&Seçilmişləri göstər
+br:Mostrar &favoritos
 cn:显示收藏夹(&F)
+de:Favoriten anzeigen
 es:Mostrar &Favoritos
 fr:Afficher les &favoris
 ga:Taispeáin na &Ceanáin
+ja:お気に入りを表示(&F)
 lv:Rādīt &izlasi
 nl:Toon &Favorieten
 pt:Mostrar &favoritos
@@ -15581,10 +15602,13 @@ uz:&Asboblar panelini ko'rsatish
 vn:Hiện thanh công cụ
 :Show Book&marks\tF12
 az:Əlfə&cinləri göstər\tF12
+br:Mostrar &marcadores\tF12
 cn:显示书签(&M)\tF12
+de:Lesezeichen anzeigen\tF12
 es:Mostrar Mar&cadores\tF12
 fr:Afficher les &marque-pages\tF12
 ga:Taispeáin na Leabhar&mharcanna\tF12
+ja:ブックマークを表示 (&M)\tF12
 lv:Rādīt grāmat&zīmes\tF12
 nl:Toon Blad&wijzers\tF12
 pt:Mostrar &marcadores\tF12
@@ -15596,7 +15620,7 @@ ar:إظهار المفضلة
 az:Seçilmişləri göstər
 bg:Покажи Любими
 bn:পছন্দসমূহ
-br:Mostrar Favoritos
+br:Mostrar favoritos
 bs:Prikaži favorite
 by:Паказаць лепшыя закладкі
 ca-xv:Mostra els preferits
@@ -15713,12 +15737,15 @@ uz:Tez-tez o'qiladiganlarni ko'rsatish
 vn:Hiện Đọc thường xuyên
 :Show in &folder
 az:Qovlu&qda göstər
+br:Mostrar na &pasta
 cn:打开所在文件夹(&F)
 co:Affissà in u car&tulare
 cz:Zobrazit ve &složce
+de:Dokumet-&Ordner öffnen
 es:Mostrar en &Carpeta
 fr:Montrer dans le &dossier
 ga:Taispeáin san &fillteán
+ja:フォルダを表示(&F)
 lv:Rādīt &mapē
 nl:Toon in &map
 pt:Mostrar na &pasta
@@ -17261,7 +17288,7 @@ am:Ծրագիրը հեռացվում է...
 ar:إزالة التثبيت قيد التقدم...
 az:Deinstalyasiya davam edir...
 bg:Деинсталиране...
-br:Desinstalação em progresso...
+br:Desinstalação em progresso…
 bs:Deinstalacija u toku ...
 by:Ідзе знішчэнне...
 ca-xv:Desinstal·lació en progrés...
@@ -18112,7 +18139,7 @@ ar:عامل التكبير/التصغير
 az:Miqyas
 bg:Коефициент на увеличение
 bn:বিবর্ধক অনুপাত
-br:Proporção de Zoom
+br:Proporção de zoom
 bs:Faktor uvećanja
 by:Маштабны каэфіцыент
 ca-xv:Factor d'escala
@@ -18251,7 +18278,7 @@ cn:正在复制文本
 co:copia di testu
 cy:copïo testun
 cz:kopírování textu
-de:Text kopieren verweigert
+de:kopiere Text
 dk:kopierer tekst
 el:αντιγραφή κειμένου
 es:copiado de texto

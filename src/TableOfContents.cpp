@@ -360,19 +360,12 @@ void ShowExportedBookmarksMsg(const char* path) {
 }
 
 static void ExportBookmarksFromTab(TabInfo* tab) {
-    auto* tocTree = tab->ctrl->GetToc();
+    // TODO: should I set engineFilePath and nPages on root node so that
+    // it's the same as .vbkm?
+    TocTree* tocTree = tab->ctrl->GetToc();
     str::Str path = strconv::WstrToUtf8(tab->filePath);
     path.Append(".bkm");
-    Vec<VbkmForFile*> bookmarks;
-
-    VbkmForFile* bkms = new VbkmForFile();
-    bkms->filePath = strconv::WstrToUtf8(tab->filePath);
-    bkms->toc = CloneTocTree(tocTree, false);
-    bkms->nPages = tab->ctrl->PageCount();
-    bookmarks.push_back(bkms);
-    bool ok = ExportBookmarksToFile(bookmarks, "", path.c_str());
-    delete bkms;
-
+    bool ok = ExportBookmarksToFile(tocTree, "", path.c_str());
     ShowExportedBookmarksMsg(path.c_str());
 }
 
@@ -411,28 +404,30 @@ static bool IsForVbkm(WindowInfo* win) {
 static void StartTocEditorForWindowInfo(WindowInfo* win) {
     auto* tab = win->currentTab;
     TocEditorArgs* args = new TocEditorArgs();
-    // args->filePath = str::Dup(tab->filePath);
+    args->filePath = str::Dup(tab->filePath);
 
-    VbkmFile vbkm;
+    VbkmFile *vbkm = new VbkmFile();
     AutoFreeStr filePath = strconv::WstrToUtf8(tab->filePath);
     if (str::EndsWithI(tab->filePath, L".vbkm")) {
-        LoadVbkmFile(filePath, vbkm);
-        int n = vbkm.vbkms.isize();
-        for (int i = 0; i < n; i++) {
-            auto b = vbkm.vbkms[i];
-            args->bookmarks.push_back(b);
+        bool ok = LoadVbkmFile(filePath, *vbkm);
+        if (!ok) {
+            // TODO: show error message box
+            return;
         }
-        vbkm.vbkms.clear();
+        args->bookmarks = vbkm;
     } else {
-        VbkmForFile* bkms = new VbkmForFile();
-        bkms->filePath = filePath.release();
-        bkms->nPages = tab->ctrl->PageCount();
-
         TocTree* tree = (TocTree*)win->tocTreeCtrl->treeModel;
-        bkms->toc = CloneTocTree(tree, false);
-        args->bookmarks.push_back(bkms);
-    }
+        TocItem* rootCopy = CloneTocItemRecur(tree->root, false);
+        rootCopy->nPages = tab->ctrl->PageCount();
+        rootCopy->engineFilePath = filePath.release();
 
+        const WCHAR* name = path::GetBaseNameNoFree(tab->filePath);
+        TocItem* newRoot = new TocItem(nullptr, name, 0);
+        newRoot->isOpenDefault = true;
+        newRoot->child = rootCopy;
+        vbkm->tree = new TocTree(newRoot);
+    }
+    args->bookmarks = vbkm;
     args->hwndRelatedTo = win->hwndFrame;
     StartTocEditor(args);
 }
@@ -516,14 +511,13 @@ static void TocContextMenu(ContextMenuArgs* args) {
 }
 
 static void AltBookmarksChanged(WindowInfo* win, TabInfo* tab, int n, std::string_view s) {
-    TocTree* tocTree = nullptr;
     if (n == 0) {
-        tocTree = tab->ctrl->GetToc();
+        TocTree* tocTree = tab->ctrl->GetToc();
+        win->tocTreeCtrl->SetTreeModel(tocTree);
     } else {
-        auto vbkms = tab->altBookmarks[0]->vbkms;
-        tocTree = vbkms.at(n - 1)->toc;
+        TocTree* tocTree = tab->altBookmarks[0]->tree;
+        win->tocTreeCtrl->SetTreeModel(tocTree);
     }
-    win->tocTreeCtrl->SetTreeModel(tocTree);
 }
 
 // TODO: temporary
@@ -582,12 +576,11 @@ void LoadTocTree(WindowInfo* win) {
     // TODO: restore showing alternative bookmarks
     VbkmFile* vbkm = new VbkmFile();
     bool ok = LoadAlterenativeBookmarks(tab->filePath, *vbkm);
-    if (ok && vbkm->vbkms.size() > 0) {
+    if (ok) {
         tab->altBookmarks.push_back(vbkm);
         Vec<std::string_view> items;
-        size_t n = vbkm->vbkms.size();
         items.Append("Default");
-        char* name = vbkm->name.get();
+        char* name = vbkm->name;
         if (name) {
             items.Append(name);
         }

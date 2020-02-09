@@ -198,12 +198,6 @@ struct TocItem : TreeItem {
     // if GetLink() returns a destination to a page, the two should match
     int pageNo = 0;
 
-    // auto-calculated page number that tells us a span from
-    // pageNo => endPageNo
-    // only used by TocEditor and EngineMulti
-    // TODO: maybe create a subclass of TocItem
-    int endPageNo = 0;
-
     // arbitrary number allowing to distinguish this TocItem
     // from any other of the same ToC tree (must be constant
     // between runs so that it can be persisted in FileState::tocState)
@@ -218,6 +212,14 @@ struct TocItem : TreeItem {
     TocItem* child = nullptr;
     // next sibling
     TocItem* next = nullptr;
+
+    // -- only for .vbkm usage (EngineMulti, TocEditor) --
+    // marks a node that represents a file
+    char* engineFilePath = nullptr;
+    int nPages = 0;
+    // auto-calculated page number that tells us a span from
+    // pageNo => endPageNo
+    int endPageNo = 0;
 
     TocItem() = default;
 
@@ -258,6 +260,7 @@ struct TocTree : TreeModel {
 };
 
 TocTree* CloneTocTree(TocTree*, bool removeUnchecked);
+bool VisitTocTree(TocItem* ti, const std::function<bool(TocItem*)>& f);
 
 // a helper that allows for rendering interruptions in an engine-agnostic way
 class AbortCookie {
